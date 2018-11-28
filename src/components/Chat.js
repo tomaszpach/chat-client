@@ -3,8 +3,11 @@ import React, {Component} from 'react';
 class Chat extends Component {
     handleFormSubmit(e) {
         e.preventDefault();
-        let text = this.refs.messageText.value;
-        this.props.actions.send(text);
+        let text = this.refs.messageText.value,
+            nick = this.refs.nickName.value;
+
+        const nickText = `[${nick}]: ${text}`;
+        this.props.actions.send(nickText);
     }
 
     render() {
@@ -17,7 +20,8 @@ class Chat extends Component {
                 <form onSubmit={(e) => this.handleFormSubmit(e)}>
                     <div className="form-group">
                         <div className="input-group">
-                            <input type="text" ref="messageText" className="form-control"/>
+                            <input placeholder="nick" type="text" ref="nickName" className="form-control"/>
+                            <input placeholder="message" type="text" ref="messageText" className="form-control"/>
                             <span className="input-group-btn">
                                 <button type="submit" className="btn btn-prime">Send</button>
                             </span>
